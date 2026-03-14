@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121214">
+    <meta name="description" content="AHC TEAM - Professional Event & Activity Management Platform.">
+    <title>AHC TEAM - Mini Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/logo.png">
+</head>
+<body>
+    <nav class="navbar"></nav>
+    <main id="app-content">
+        <section id="miniclub" class="page-section active fade-in">
+            <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+                <h2 data-i18n="miniclub.title" style="font-size: 3rem; text-transform: uppercase;">Mini Club Etkinlikleri</h2>
+                <p data-i18n="miniclub.desc" style="color: var(--text-dim);">Çocuklarınız için eğlenceli ve eğitici programlar</p>
+                <div id="weather-container" style="margin-top: 2rem; display: flex; justify-content: center;"></div>
+            </div>
+            <div class="program-list" id="miniclub-list">
+                <!-- Data rendered by JS -->
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="../js/data.js"></script>
+    <script src="../js/translations.js"></script>
+    <script src="../js/core.js"></script>
+    <script src="../js/weather.js"></script>
+    <script src="miniclub.js"></script>
+</body>
+</html>

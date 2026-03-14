@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121214">
+    <title>AHC TEAM - Page Not Found</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="apple-touch-icon" id="apple-touch-icon" href="./assets/logo.png">
+    <link rel="stylesheet" id="main-style" href="./css/style.css">
+    <link rel="manifest" id="manifest-link" href="./manifest.json">
+</head>
+<body class="page-enter">
+    <nav class="navbar"></nav>
+    <main id="app-content">
+        <div class="error-404-container">
+            <div class="error-404-code">404</div>
+            <div class="container fade-in" style="position: relative; z-index: 2;">
+                <i class="ph ph-warning-circle" style="font-size: 5rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                <h1 data-i18n="errors.title">SAYFA BULUNAMADI</h1>
+                <p data-i18n="errors.desc">Aradığınız sayfa taşınmış veya silinmiş olabilir.</p>
+                <a href="./index.html" class="primary-btn" id="home-btn">
+                    <i class="ph ph-house"></i> <span data-i18n="errors.btn">Ana Sayfaya Dön</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+
+    <!-- Dependency Setup -->
+    <script src="./js/data.js" id="js-data"></script>
+    <script src="./js/translations.js" id="js-trans"></script>
+    <script src="./js/core.js" id="js-core"></script>
+
+    <script>
+        // Adjust paths based on location before core.js hits
+        const base = (window.location.pathname.includes('/home/') || 
+                      window.location.pathname.includes('/daily/') || 
+                      window.location.pathname.includes('/evening/') || 
+                      window.location.pathname.includes('/miniclub/') || 
+                      window.location.pathname.includes('/team/') || 
+                      window.location.pathname.includes('/admin/')) ? '../' : './';
+        
+        document.getElementById('apple-touch-icon').href = base + 'assets/logo.png';
+        document.getElementById('main-style').href = base + 'css/style.css';
+        document.getElementById('manifest-link').href = base + 'manifest.json';
+        document.getElementById('js-data').src = base + 'js/data.js';
+        document.getElementById('js-trans').src = base + 'js/translations.js';
+        document.getElementById('js-core').src = base + 'js/core.js';
+        document.getElementById('home-btn').href = base + 'index.html';
+
+        // Auto-redirect after 15s
+        setTimeout(() => {
+            window.location.href = base + 'index.html';
+        }, 15000);
+    </script>
+</body>
+</html>
+

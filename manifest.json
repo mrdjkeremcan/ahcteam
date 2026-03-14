@@ -1,0 +1,31 @@
+{
+  "name": "AHC TEAM Portal",
+  "short_name": "AHC TEAM",
+  "description": "Modern and dynamic event management platform for AHC TEAM.",
+  "start_url": "./home/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0c",
+  "theme_color": "#f0b429",
+  "icons": [
+    {
+      "src": "./assets/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Daily Program",
+      "url": "./daily/index.html",
+      "icons": [{ "src": "./assets/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Evening Program",
+      "url": "./evening/index.html",
+      "icons": [{ "src": "./assets/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}

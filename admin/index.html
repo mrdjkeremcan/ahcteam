@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121214">
+    <meta name="description" content="AHC TEAM - Professional Event & Activity Management Platform.">
+    <title>AHC TEAM - Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/logo.png">
+</head>
+<body>
+    <nav class="navbar"></nav>
+    <main id="app-content">
+        <!-- Login Section -->
+        <section id="login" class="page-section active fade-in">
+            <div class="login-container">
+                <i class="ph ph-fire" style="font-size: 4rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                <h2 data-i18n="login.title" style="font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1rem;">Yönetici Girişi</h2>
+                <p data-i18n="login.desc" style="color: var(--text-dim); margin-bottom: 3rem;">Programları düzenlemek için yetkili girişi yapın.</p>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="username" data-i18n="login.userLabel">Kullanıcı Adı</label>
+                        <input type="text" id="username" data-i18n-holder="login.userPlace" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password" data-i18n="login.passLabel">Şifre</label>
+                        <input type="password" id="password" data-i18n-holder="login.passPlace" required>
+                    </div>
+                    <button type="submit" class="primary-btn" style="width: 100%;" data-i18n="login.btn">Giriş Yap</button>
+                    <p id="login-error" style="color: #ff4444; margin-top: 1rem; font-weight: 600;"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard Section -->
+        <section id="dashboard" class="page-section fade-in">
+            <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4rem;">
+                <div>
+                    <h2 data-i18n="admin.title" style="font-size: 3rem; text-transform: uppercase;">Yönetim Paneli</h2>
+                    <p data-i18n="admin.subtitle" style="color: var(--text-dim);">Program ekle, düzenle veya sil</p>
+                    <div id="weather-container" style="margin-top: 1rem; opacity: 0.8; transform: scale(0.9); transform-origin: left centre;"></div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="secondary-btn" id="export-btn" style="border-color: var(--primary); color: var(--primary);">
+                        <i class="ph ph-download-simple"></i> <span data-i18n="admin.export_btn">Verileri Dışa Aktar</span>
+                    </button>
+                    <button class="secondary-btn" id="logout-btn">
+                        <i class="ph ph-power"></i> <span data-i18n="admin.logout">Çıkış Yap</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="admin-grid">
+                <div class="admin-panel-form">
+                    <form id="admin-form" class="admin-form">
+                        <input type="hidden" id="p-id" value="">
+                        <div class="flex justify-between items-center" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 data-i18n="admin.add_title" id="form-title" style="text-transform: uppercase; margin: 0;">Yeni Etkinlik Ekle</h3>
+                            <button type="button" id="cancel-edit-btn" class="secondary-btn" style="display: none; padding: 0.5rem 1rem; font-size: 0.8rem;" data-i18n="admin.cancel_btn">İptal</button>
+                        </div>
+                        <div class="input-group">
+                            <label for="p-type" data-i18n="admin.form_type">Program Türü</label>
+                            <select id="p-type">
+                                <option value="daily" data-i18n="admin.tab_daily">Günlük Program</option>
+                                <option value="party" data-i18n="admin.tab_party">PARTY</option>
+                                <option value="evening" data-i18n="admin.tab_evening">Akşam Programı</option>
+                                <option value="miniclub" data-i18n="admin.tab_miniclub">Mini Club</option>
+                                <option value="team" data-i18n="footer.team">Ekibimiz</option>
+                            </select>
+                        </div>
+
+                        <!-- Team Specific Fields -->
+                        <div id="team-fields" style="display: none;">
+                            <div class="input-group">
+                                <label for="t-role" data-i18n="admin.form_role">Görev / Rol</label>
+                                <select id="t-role">
+                                    <option value="animation_manager" data-i18n="team.roles.animation_manager">Animasyon Müdürü</option>
+                                    <option value="sound_light_chief" data-i18n="team.roles.sound_light_chief">Ses ve Işık Şefi</option>
+                                    <option value="dj" data-i18n="team.roles.dj">DJ</option>
+                                    <option value="animator" data-i18n="team.roles.animator">Animatör</option>
+                                    <option value="fitness" data-i18n="team.roles.fitness">Fitness Eğitmeni</option>
+                                    <option value="dance" data-i18n="team.roles.dance">Dans Eğitmeni</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="t-img" data-i18n="admin.form_img">Fotoğraf URL</label>
+                                <input type="text" id="t-img" placeholder="https://images.unsplash.com/...">
+                            </div>
+                        </div>
+
+                        <div id="prog-fields">
+                            <div class="input-group" id="day-select-group" style="display: none;">
+                                <label for="p-day" data-i18n="admin.form_day">Gün (Sadece Akşam)</label>
+                                <select id="p-day">
+                                    <option value="mon" data-i18n="days.mon">Pazartesi</option>
+                                    <option value="tue" data-i18n="days.tue">Salı</option>
+                                    <option value="wed" data-i18n="days.wed">Çarşamba</option>
+                                    <option value="thu" data-i18n="days.thu">Perşembe</option>
+                                    <option value="fri" data-i18n="days.fri">Cuma</option>
+                                    <option value="sat" data-i18n="days.sat">Cumartesi</option>
+                                    <option value="sun" data-i18n="days.sun">Pazar</option>
+                                </select>
+                            </div>
+                            <div class="input-group" id="time-group">
+                                <label for="p-time" data-i18n="admin.form_time">Saat (Örn: 10:00 - 11:30)</label>
+                                <input type="text" id="p-time">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="p-title" id="title-label" data-i18n="admin.form_title">Etkinlik Başlığı</label>
+                            <input type="text" id="p-title" required>
+                        </div>
+                        
+                        <div class="input-group" id="loc-group">
+                            <label for="p-loc" data-i18n="admin.form_loc">Konum / Mekan</label>
+                            <select id="p-loc">
+                                <option value="garden" data-i18n="loc.garden">@GARDEN</option>
+                                <option value="sunset" data-i18n="loc.sunset">@SUNSET</option>
+                                <option value="pool" data-i18n="loc.pool">@MAIN POOL</option>
+                                <option value="amphitheater" data-i18n="loc.amphitheater">@AMPHITHEATER</option>
+                                <option value="sunset_bar" data-i18n="loc.sunset_bar">@SUNSET LOUNGE BAR</option>
+                                <option value="miniclub" data-i18n="loc.miniclub">@MINI CLUB</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group" id="icon-group">
+                            <label for="p-icon" data-i18n="admin.form_icon">İkon (Örn: ph-coffee)</label>
+                            <input type="text" id="p-icon" value="ph-star">
+                        </div>
+
+                        <button type="submit" class="primary-btn" id="submit-p-btn" style="width: 100%;">
+                            <i class="ph ph-plus-circle"></i> <span data-i18n="admin.add_btn">Ekle / Güncelle</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="admin-panel-list">
+                    <h3 data-i18n="admin.view_title" style="margin-bottom: 2rem; text-transform: uppercase;">Mevcut Programlar</h3>
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-type="daily" data-i18n="admin.tab_daily">Günlük</button>
+                        <button class="admin-tab" data-type="party" data-i18n="admin.tab_party">PARTY</button>
+                        <button class="admin-tab" data-type="evening" data-i18n="admin.tab_evening">Akşam</button>
+                        <button class="admin-tab" data-type="miniclub" data-i18n="admin.tab_miniclub">Mini Club</button>
+                        <button class="admin-tab" data-type="team" data-i18n="footer.team">Ekibimiz</button>
+                        <button class="admin-tab" data-type="analytics" style="border-color: var(--primary); color: var(--primary);">
+                            <i class="ph ph-chart-bar"></i> Analytics
+                        </button>
+                    </div>
+                    <div id="admin-list-container">
+                        <!-- JS renders current programs here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="../js/data.js"></script>
+    <script src="../js/translations.js"></script>
+    <script src="../js/core.js"></script>
+    <script src="../js/weather.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
